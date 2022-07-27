@@ -1,7 +1,5 @@
 const { models, model } = require('mongoose');
 const ToDo = require('../models/ToDoModel');
-// const TodoModel = require('../models/ToDoModel');
-
 
 module.exports.getToDo = async (req, res) => {
     // const Todo = await TodoModel.find();
@@ -26,6 +24,24 @@ module.exports.deleteToDo = (req, res) => {
         .then(() => { res.set(201).send('Deleted Successfully') })
         .catch((err) => { console.log(err) });
 }
+module.exports.deleteToDos=(req,res)=>{
+    console.log(req.body);
+    const arrayIds = req.body;
+    console.log('delete TODOS');
+    // arrayIds.forEach(ele=>{
+    //     console.log(ele);
+    // })
+    // arrayIds.forEach(element => {
+    //     ToDo.findByIdAndDelete(element)
+    // .then(()=>{res.set(201).send('deleted successfully..')})
+    // .catch((err)=>{console.log(err)});
+    // });
+    ToDo.deleteMany({})
+    //ToDo.deleteMany({completed:true})
+    .then(()=>{res.set(201).send('deleted successfully..')})
+     .catch((err)=>{console.log(err)});
+    
+}
 module.exports.updateToDo = (req, res) => {
     const { _id, text } = req.body;
     console.log('server update');
@@ -48,4 +64,9 @@ module.exports.singleCheck = (req, res) => {
         })
         .catch((err) => { console.log(err) });
 }
-
+module.exports.multiCheck = (req,res)=>{
+    console.log("multicheck");
+    // ToDo.updateMany({},{$set:{completed:!completed}})
+    // .then(()=>{res.set(201).send('deleted successfully..')})
+    //  .catch((err)=>{console.log(err)});
+}
