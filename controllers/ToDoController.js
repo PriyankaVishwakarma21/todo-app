@@ -66,7 +66,10 @@ module.exports.singleCheck = (req, res) => {
 }
 module.exports.multiCheck = (req,res)=>{
     console.log("multicheck");
-    // ToDo.updateMany({},{$set:{completed:!completed}})
-    // .then(()=>{res.set(201).send('deleted successfully..')})
-    //  .catch((err)=>{console.log(err)});
+    //console.log(req.body);
+    const {completed} = req.body;
+    //const bool = (completed===true)?false:true;
+    ToDo.updateMany({},{$set:{completed:true}})
+    .then(()=>{res.set(201).send('All checked successfully..')})
+     .catch((err)=>{console.log(err)});
 }
